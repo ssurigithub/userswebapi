@@ -4,14 +4,21 @@
 # https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
 
 trigger:
-- master
+  - master
 
 pool:
-  vmImage: 'ubuntu-latest'
+  vmImage: "ubuntu-latest"
 
 variables:
-  buildConfiguration: 'Release'
+  buildConfiguration: "Release"
+  runBy: "Saravanan"
 
 steps:
-- script: dotnet build --configuration $(buildConfiguration)
-  displayName: 'dotnet build $(buildConfiguration)'
+  - script: |
+    echo 'the build configuration is $(buildConfiguration)'
+    echo 'the Agent machine name is $(Agent.MachineName)'
+    echo 'the build Number is $(Build.BuildNumber)'
+    echo 'the Build Uri  is $(Build.BuildUri)'
+    echo 'the build reason is $(Build.Reason)'
+    echo 'the build reason is $(runBy)'
+  displayName: "dotnet build $(buildConfiguration)"
