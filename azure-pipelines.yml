@@ -14,4 +14,4 @@ variables:
   runBy: "Saravanan"
 
 steps:
-  - bash: pwd
+  - bash: ls -al
