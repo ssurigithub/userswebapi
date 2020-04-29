@@ -14,5 +14,9 @@ variables:
   runBy: "Saravanan"
 
 steps:
-  - bash: ls -al ./scripts.sh
-  - bash: ./scripts.sh
+  - script: echo "the build configuration is $(buildConfiguration)"
+  - script: echo "the Agent machine name is $(Agent.MachineName)"
+  - script: echo "the build Number is $(Build.BuildNumber)"
+  - script: echo "the Build Uri  is $(Build.BuildUri)"
+  - script: echo "the build reason is $(Build.Reason)"
+  - script: echo "the build reason is $(runBy)"
