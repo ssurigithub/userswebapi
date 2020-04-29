@@ -16,4 +16,5 @@ variables:
 steps:
   - script: |
     echo "good"
-    echo "nice"
+
+    
