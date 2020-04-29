@@ -15,4 +15,5 @@ variables:
 
 steps:
   - script: |
-    echo "good"
+  echo test
+  echo testing
