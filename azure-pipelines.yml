@@ -14,4 +14,4 @@ variables:
   runBy: "Saravanan"
 
 steps:
-  - script: echo test
+  - bash: "scripts.sh"

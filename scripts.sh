@@ -1,0 +1,6 @@
+echo "the build configuration is $(buildConfiguration)"
+      echo "the Agent machine name is $(Agent.MachineName)"
+      echo "the build Number is $(Build.BuildNumber)"
+      echo "the Build Uri  is $(Build.BuildUri)"
+      echo "the build reason is $(Build.Reason)"
+      echo "the build reason is $(runBy)"
