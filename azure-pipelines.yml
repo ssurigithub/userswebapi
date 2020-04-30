@@ -27,6 +27,7 @@ stages:
       - job: A2
         dependsOn: A1
         displayName: "Job A2 which prints local variables"
+        condition: failed('A')
         variables:
           buildConfiguration: "Debug"
           runBy: "Sharvesh"
