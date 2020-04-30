@@ -7,7 +7,7 @@ trigger:
   - master
 stages:
   - stage: A
-    pool: StageAPool
+    pool:
       vmImage: "ubuntu-latest"
     jobs:
       - job: A1
@@ -15,7 +15,7 @@ stages:
         variables:
           buildConfiguration: "Release"
           runBy: "Saravanan"
-        
+
         steps:
           - script: echo "the build configuration is $(buildConfiguration)"
           - script: echo "the Agent machine name is $(Agent.MachineName)"
@@ -29,7 +29,7 @@ stages:
         variables:
           buildConfiguration: "Debug"
           runBy: "Sharvesh"
-        
+
         steps:
           - script: echo "the build configuration is $(buildConfiguration)"
           - script: echo "the Agent machine name is $(Agent.MachineName)"
@@ -37,5 +37,3 @@ stages:
           - script: echo "the Build Uri  is $(Build.BuildUri)"
           - script: echo "the build reason is $(Build.Reason)"
           - script: echo "the build reason is $(runBy)"
-
-
