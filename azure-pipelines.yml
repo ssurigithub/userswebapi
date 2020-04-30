@@ -9,6 +9,7 @@ stages:
   - stage: A
     pool:
       vmImage: "ubuntu-latest"
+      name: "pool A"
     jobs:
       - job: A1
         displayName: "Job A1 which prints local variables"
@@ -25,6 +26,7 @@ stages:
           - script: echo "the build reason is $(runBy)"
 
       - job: A2
+        dependsOn: A1
         displayName: "Job A2 which prints local variables"
         variables:
           buildConfiguration: "Debug"
