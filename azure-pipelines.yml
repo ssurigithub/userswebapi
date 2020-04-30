@@ -5,18 +5,37 @@
 
 trigger:
   - master
+stages:
+  - stage: A
+    pool: StageAPool
+      vmImage: "ubuntu-latest"
+    jobs:
+      - job: A1
+        displayName: "Job A1 which prints local variables"
+        variables:
+          buildConfiguration: "Release"
+          runBy: "Saravanan"
+        
+        steps:
+          - script: echo "the build configuration is $(buildConfiguration)"
+          - script: echo "the Agent machine name is $(Agent.MachineName)"
+          - script: echo "the build Number is $(Build.BuildNumber)"
+          - script: echo "the Build Uri  is $(Build.BuildUri)"
+          - script: echo "the build reason is $(Build.Reason)"
+          - script: echo "the build reason is $(runBy)"
 
-pool:
-  vmImage: "ubuntu-latest"
+      - job: A2
+        displayName: "Job A2 which prints local variables"
+        variables:
+          buildConfiguration: "Debug"
+          runBy: "Sharvesh"
+        
+        steps:
+          - script: echo "the build configuration is $(buildConfiguration)"
+          - script: echo "the Agent machine name is $(Agent.MachineName)"
+          - script: echo "the build Number is $(Build.BuildNumber)"
+          - script: echo "the Build Uri  is $(Build.BuildUri)"
+          - script: echo "the build reason is $(Build.Reason)"
+          - script: echo "the build reason is $(runBy)"
 
-variables:
-  buildConfiguration: "Release"
-  runBy: "Saravanan"
 
-steps:
-  - script: echo "the build configuration is $(buildConfiguration)"
-  - script: echo "the Agent machine name is $(Agent.MachineName)"
-  - script: echo "the build Number is $(Build.BuildNumber)"
-  - script: echo "the Build Uri  is $(Build.BuildUri)"
-  - script: echo "the build reason is $(Build.Reason)"
-  - script: echo "the build reason is $(runBy)"
