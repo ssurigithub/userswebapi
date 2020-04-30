@@ -9,7 +9,6 @@ stages:
   - stage: A
     pool:
       vmImage: "ubuntu-latest"
-      name: "pool A"
     jobs:
       - job: A1
         displayName: "Job A1 which prints local variables"
