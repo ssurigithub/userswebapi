@@ -1,7 +1,5 @@
-# ASP.NET Core
-# Build and test ASP.NET Core projects targeting .NET Core.
-# Add steps that run tests, create a NuGet package, deploy, and more:
-# https://docs.microsoft.com/azure/devops/pipelines/languages/dotnet-core
+# the dependsOn and condition can be specified at a stage level, job level, or task level
+# you can also use a variable defined in the previous job / stage / task in the next task / stage / job
 
 trigger:
   - master
@@ -27,10 +25,10 @@ stages:
       - job: A2
         dependsOn: A1
         displayName: "Job A2 which prints local variables"
-        condition: failed('A')
+        #condition: failed('A')
         variables:
           buildConfiguration: "Debug"
-          runBy: "Sharvesh"
+          runBy: $[ dependencies.A1.outputs['A1.runBy']]
 
         steps:
           - script: echo "the build configuration is $(buildConfiguration)"
