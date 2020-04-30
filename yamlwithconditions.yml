@@ -1,0 +1,44 @@
+# the dependsOn and condition can be specified at a stage level, job level, or task level
+# you can also use a variable defined in the previous job / stage / task in the next task / stage / job
+
+trigger:
+    - master
+  stages:
+    - stage: A
+      pool:
+        vmImage: "ubuntu-latest"
+      jobs:
+        - job: A1
+          displayName: "Job A1 which prints local variables"
+          variables:
+            buildConfiguration: "Release"
+            runBy: "Saravanan"
+  
+          steps:
+            - script: echo "the build configuration is $(buildConfiguration)"
+            - script: echo "the Agent machine name is $(Agent.MachineName)"
+            - script: echo "the build Number is $(Build.BuildNumber)"
+            - script: echo "the Build Uri  is $(Build.BuildUri)"
+            - script: echo "the build reason is $(Build.Reason)"
+            - script: echo "the build reason is $(runBy)"
+            - script: echo "##vso[task.setvariable variable=myOutputVar;isOutput=true]this is the $(buildConfiguration) value"
+              name: setvarStep
+            - script: echo $(setvarStep.myOutputVar)
+              name: echovar
+  
+        - job: A2
+          dependsOn: A1
+          displayName: "Job A2 which prints local variables"
+          #condition: failed('A')
+          variables:
+            buildConfiguration: "Debug"
+            runBy: $[ dependencies.A1.outputs['setvarStep.myOutputVar']]
+  
+          steps:
+            - script: echo "the build configuration is $(buildConfiguration)"
+            - script: echo "the Agent machine name is $(Agent.MachineName)"
+            - script: echo "the build Number is $(Build.BuildNumber)"
+            - script: echo "the Build Uri  is $(Build.BuildUri)"
+            - script: echo "the build reason is $(Build.Reason)"
+            - script: echo "the build reason is $(runBy)"
+  
